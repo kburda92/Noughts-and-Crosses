@@ -26,7 +26,7 @@ Rectangle {
         height: 360
         anchors.left: parent.left
         anchors.leftMargin: 0
-        scale: 1.01
+        scale: 1.02
         visible: true
         clip: false
     }

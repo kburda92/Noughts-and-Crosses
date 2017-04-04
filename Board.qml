@@ -1,7 +1,9 @@
 import QtQuick 2.0
 
 Item {
-    // our delegate
+    id: boardForm
+    objectName: "BoardForm"
+    property int player: 1
     Component {
         id: delegate
         Rectangle {
@@ -15,18 +17,31 @@ Item {
             Text {
                 text: index
             }
+            MouseArea{
+                anchors.fill: parent
+                onClicked:
+                {
+                    if(player == 1)
+                        player = 2;
+                    else
+                        player = 1;
+                    boardForm.move(index);
+                }
+            }
         }
     }
 
     GridView {
         id: grid
+        interactive: false
         anchors.fill: parent
-        //we added 2 to hide borders
-        height: parent.height + 20
-        width: parent.width + 20
+        height: parent.height
+        width: parent.width
         cellHeight: height/3
         cellWidth: width/3
         model: 9
-        delegate: delegate
+        delegate: delegate        
     }
+
+    signal move(int fieldNumber)
 }

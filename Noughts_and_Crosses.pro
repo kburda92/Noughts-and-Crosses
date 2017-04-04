@@ -1,10 +1,11 @@
 TEMPLATE = app
 
 QT += qml quick
-CONFIG += c++11
+CONFIG += c++14
 
 SOURCES += main.cpp \
-    GameEngine.cpp
+    GameEngine.cpp \
+    Game.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,4 +16,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    GameEngine.h
+    GameEngine.h \
+    Game.h
