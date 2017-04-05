@@ -14,13 +14,18 @@ Item {
             width: parent.width/3
             height: parent.height/3
 
-            Text {
-                text: index
-            }
             MouseArea{
+                id: field
                 anchors.fill: parent
+                function loadButton() {
+                    var component = Qt.createComponent("Result.qml");
+                    if (component.status == Component.Ready) {
+                        var button = component.createObject(field);
+                    }
+                }
                 onClicked:
                 {
+                    loadButton();
                     if(player == 1)
                         player = 2;
                     else
@@ -28,6 +33,8 @@ Item {
                     boardForm.move(index);
                 }
             }
+
+
         }
     }
 

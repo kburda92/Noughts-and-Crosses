@@ -2,22 +2,18 @@
 #define GAME_H
 
 #include <array>
-
-enum FieldState
-{
-    empty,
-    nought,
-    cross
-};
-
+enum class Figure;
 class Game
 {
 public:
     Game();
+    bool MakeMove(int fieldNumber, Figure state);
+    int GetNonEmptyFields();
 private:
-    std::array<std::array<int, 3>, 3> m_actual_board;
-    void MakeMove(int fieldNumber, FieldState state);
-    void CheckIsGameFinished();
+    std::array<std::array<Figure, 3>, 3> m_actual_board;
+    bool CheckIsGameFinished();
+    int m_non_empty_fields = 0;
+
 };
 
 #endif // GAME_H

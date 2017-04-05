@@ -17,4 +17,5 @@ include(deployment.pri)
 
 HEADERS += \
     GameEngine.h \
-    Game.h
+    Game.h \
+    Utils.h
