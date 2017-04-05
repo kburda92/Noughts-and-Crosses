@@ -1,8 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickView>
+#include <QQmlContext>
 #include <memory>
 #include "GameEngine.h"
-#include <QQuickView>
 
 int main(int argc, char *argv[])
 {
@@ -10,9 +11,10 @@ int main(int argc, char *argv[])
 
     GameEngine gameEngine;
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("gameEngine", &gameEngine);
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    auto roots = engine.rootObjects();
     QObject* board = engine.rootObjects().at(0)->findChild<QObject*>("BoardForm");
     QObject::connect(board,
                      SIGNAL(move(int)),

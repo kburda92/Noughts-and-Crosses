@@ -3,7 +3,6 @@ import QtQuick 2.0
 Item {
     id: boardForm
     objectName: "BoardForm"
-    property int player: 1
     Component {
         id: delegate
         Rectangle {
@@ -26,10 +25,6 @@ Item {
                 onClicked:
                 {
                     loadButton();
-                    if(player == 1)
-                        player = 2;
-                    else
-                        player = 1;
                     boardForm.move(index);
                 }
             }

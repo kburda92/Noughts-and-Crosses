@@ -3,6 +3,11 @@ import QtQuick 2.4
 Item {
     width: 120
     height: 360
+    objectName: "ResultForm"
+
+    property alias draws: draws.text
+    property alias player1Won: player1Won.text
+    property alias player2Won: player2Won.text
 
     Rectangle {
         id: rectangle1
