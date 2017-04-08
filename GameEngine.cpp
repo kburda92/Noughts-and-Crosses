@@ -7,6 +7,7 @@ using namespace std;
 GameEngine::GameEngine(QObject* parent) : QObject(parent),
   game(make_unique<Game>())
 {
+    m_actual_player = 1;
 }
 
 GameEngine::~GameEngine()
@@ -40,6 +41,12 @@ void GameEngine::setPlayer2Won(int value)
     }
 }
 
+void GameEngine::setActualPlayer(int value)
+{
+    m_actual_player = value;
+    emit actualPlayerChanged();
+}
+
 int GameEngine::draws() const
 {
     return m_draws;
@@ -55,30 +62,32 @@ int GameEngine::player2Won() const
     return m_player2_won;
 }
 
-void GameEngine::Move(int field)
+int GameEngine::actualPlayer() const
 {
-    //if it was last empty field we know it's draw, we don't need to check it
-    //if MakeMove return true we send signal to QML window about winner
-    if(game->MakeMove(field, m_figure))
-        AddToResults(m_figure);
-    else if(game->GetNonEmptyFields() == 9)
-        AddToResults(Figure::empty);
-
-    m_figure = m_figure == Figure::cross ? Figure::nought : Figure::cross;
+    return m_actual_player;
 }
 
-void GameEngine::AddToResults(Figure whoWon)
+void GameEngine::Move(int field)
 {
-    //empty means it is draw
-    switch((int)whoWon)
+    //if MakeMove returns true we send signal to QML window about winner
+    //if MakeMove returns false we must we must check is board full
+    if(game->MakeMove(field, m_actual_player))
     {
-    case 0: setDraws(draws() + 1);
-        break;
-    case 1: setPlayer1Won(player1Won() + 1);
-        break;
-    case 2: setPlayer1Won(player2Won() + 1);
-        break;
+        if(m_actual_player == 1)
+            setPlayer1Won(m_player1_won + 1);
+        else if(m_actual_player == 2)
+            setPlayer1Won(m_player2_won + 1);
     }
+    else if(game->GetNonEmptyFields() == 9)
+        setDraws(m_draws + 1);
 
-    game.reset();
+    ChangePlayer();
+}
+
+void GameEngine::ChangePlayer()
+{
+    if(m_actual_player == 1)
+        setActualPlayer(2);
+    else if(m_actual_player == 2)
+        setActualPlayer(1);
 }

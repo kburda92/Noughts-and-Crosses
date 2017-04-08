@@ -15,11 +15,11 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    QObject* board = engine.rootObjects().at(0)->findChild<QObject*>("BoardForm");
-    QObject::connect(board,
-                     SIGNAL(move(int)),
-                     &gameEngine,
-                     SLOT(Move(int)));
+//    QObject* board = engine.rootObjects().at(0)->findChild<QObject*>("BoardForm");
+//    QObject::connect(board,
+//                     SIGNAL(move(int)),
+//                     &gameEngine,
+//                     SLOT(Move(int)));
 
     return app.exec();
 }

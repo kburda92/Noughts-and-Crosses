@@ -8,13 +8,13 @@ Item {
             var ctx = getContext("2d");
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(width / 2, height / 2);
+            ctx.moveTo(1/4 * width, 1/4 * height);
+            ctx.lineTo(3/4 * width, 3/4 * height);
             ctx.stroke();
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(width / 2, 0);
-            ctx.lineTo(0, height / 2);
+            ctx.moveTo(3/4 * width, 1/4 * height);
+            ctx.lineTo(1/4 * width, 3/4 * height);
             ctx.stroke();
         }
     }
