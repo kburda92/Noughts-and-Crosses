@@ -8,7 +8,7 @@ Rectangle {
     z: 1
     scale: 1
 
-    ResultForm {
+    Result {
         id: resultForm
         x: 310
         y: 0

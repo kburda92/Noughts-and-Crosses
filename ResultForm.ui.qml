@@ -6,6 +6,9 @@ Item {
     width: 120
     height: 360
 
+    property alias draws: drawsValue.text
+    property alias player1Won: player1WonValue.text
+    property alias player2Won: player2WonValue.text
     property alias startButton: startButton
 
     Rectangle {
@@ -46,7 +49,7 @@ Item {
                 Text {
                     id: drawsValue
                     x: 0
-                    text: gameEngine.draws
+                    text: qsTr("0")
                     font.pixelSize: 20
                 }
             }
@@ -67,7 +70,7 @@ Item {
                 Text {
                     id: player1WonValue
                     x: 0
-                    text: gameEngine.player1Won
+                    text: qsTr("0")
                     font.pixelSize: 20
                 }
             }
@@ -88,7 +91,7 @@ Item {
                 Text {
                     id: player2WonValue
                     x: 0
-                    text: gameEngine.player2Won
+                    text: qsTr("0")
                     font.pixelSize: 20
                 }
             }
@@ -99,18 +102,13 @@ Item {
                 height: 25
                 text: qsTr("Start game")
                 enabled: true
-                checkable: false
-                checked: false
-                autoExclusive: false
                 anchors.left: parent.left
                 anchors.leftMargin: 15
                 anchors.right: parent.right
                 anchors.rightMargin: 15
-                highlighted: false
+                visible: true
             }
 
         }
-
-
     }
 }
