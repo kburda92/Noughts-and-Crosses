@@ -5,5 +5,7 @@
         <file>Result.qml</file>
         <file>ResultForm.ui.qml</file>
         <file>Board.qml</file>
+        <file>Cross.qml</file>
+        <file>Nought.qml</file>
     </qresource>
 </RCC>
