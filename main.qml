@@ -9,7 +9,7 @@ Window {
     maximumHeight: height
     minimumWidth: width
     minimumHeight: height
-    title: qsTr("Hello World")
+    title: qsTr("Nought and Crosses")
 
     MainForm {
         anchors.fill: parent

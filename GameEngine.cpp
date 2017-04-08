@@ -67,18 +67,18 @@ int GameEngine::actualPlayer() const
     return m_actual_player;
 }
 
-void GameEngine::Move(int field)
+void GameEngine::MarkSpace(int space)
 {
     //if MakeMove returns true we send signal to QML window about winner
-    //if MakeMove returns false we must we must check is board full
-    if(game->MakeMove(field, m_actual_player))
+    //if MakeMove returns false we must we must check is board full - then it is draw
+    if(game->Mark(space, m_actual_player))
     {
         if(m_actual_player == 1)
             setPlayer1Won(m_player1_won + 1);
         else if(m_actual_player == 2)
-            setPlayer1Won(m_player2_won + 1);
+            setPlayer2Won(m_player2_won + 1);
     }
-    else if(game->GetNonEmptyFields() == 9)
+    else if(game->IsBoardFull())
         setDraws(m_draws + 1);
 
     ChangePlayer();

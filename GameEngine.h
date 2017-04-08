@@ -25,7 +25,7 @@ public:
     int player1Won() const;
     int player2Won() const;
     int actualPlayer() const;
-    Q_INVOKABLE void Move(int player);
+    Q_INVOKABLE void MarkSpace(int player);
 private:
     //m_results[0] - draws,
     //m_results[1] - player1 wins
@@ -36,8 +36,6 @@ private:
     int m_actual_player = 0;
     std::unique_ptr<Game> game;
     void ChangePlayer();
-//    Player player1, player2;
-//    Figure m_figure = Figure::nought;
 signals:
     void drawsChanged();
     void player1Changed();

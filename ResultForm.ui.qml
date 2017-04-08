@@ -1,27 +1,26 @@
 import QtQuick 2.4
+import QtQuick.Controls 2.0
+
 
 Item {
     width: 120
     height: 360
-    objectName: "ResultForm"
 
-    property alias draws: draws.text
-    property alias player1Won: player1Won.text
-    property alias player2Won: player2Won.text
+    property alias startButton: startButton
 
     Rectangle {
-        id: rectangle1
+        id: rectangle
         color: "#ffffff"
         anchors.fill: parent
 
         Column {
-            id: column1
+            id: column
             spacing: 5
             anchors.fill: parent
 
 
             Text {
-                id: text1
+                id: resultText
                 text: qsTr("Result:")
                 font.bold: true
                 font.pixelSize: 25
@@ -30,7 +29,7 @@ Item {
 
 
             Row {
-                id: row1
+                id: drawsRow
                 width: 120
                 height: 25
                 transformOrigin: Item.Center
@@ -38,60 +37,76 @@ Item {
                 spacing: 15
 
                 Text {
-                    id: text2
+                    id: drawsText
                     y: 0
                     text: qsTr("Draws:")
                     font.pixelSize: 20
                 }
 
                 Text {
-                    id: draws
+                    id: drawsValue
                     x: 0
-                    text: qsTr("0")
+                    text: gameEngine.draws
                     font.pixelSize: 20
                 }
             }
 
             Row {
-                id: row2
+                id: player1WonRow
                 width: 120
                 height: 25
                 spacing: 5
 
                 Text {
-                    id: text3
+                    id: player1WonText
                     y: 0
                     text: qsTr("Player1:")
                     font.pixelSize: 20
                 }
 
                 Text {
-                    id: player1Won
+                    id: player1WonValue
                     x: 0
-                    text: qsTr("0")
+                    text: gameEngine.player1Won
                     font.pixelSize: 20
                 }
             }
 
             Row {
-                id: row3
+                id: player2WonRow
                 width: 120
                 height: 25
                 spacing: 5
 
                 Text {
-                    id: text4
+                    id: player2WonText
                     y: 0
                     text: qsTr("Player2:")
                     font.pixelSize: 20
                 }
 
                 Text {
-                    id: player2Won
+                    id: player2WonValue
                     x: 0
-                    text: qsTr("0")
+                    text: gameEngine.player2Won
                     font.pixelSize: 20
                 }
+            }
+
+            Button {
+                id: startButton
+                width: 90
+                height: 25
+                text: qsTr("Start game")
+                enabled: true
+                checkable: false
+                checked: false
+                autoExclusive: false
+                anchors.left: parent.left
+                anchors.leftMargin: 15
+                anchors.right: parent.right
+                anchors.rightMargin: 15
+                highlighted: false
             }
 
         }
