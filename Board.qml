@@ -7,17 +7,26 @@ Item {
     property var winnerSpaces: gameEngine.winnerSpaces
     property var symbols: new Array(9)
     property var winnerLine
-//    property alias onWinnerSpacesChanged: onWinnerSpacesChanged
 
 
-//    onWinnerSpacesChanged:
-//    {
-////      boardForm.enabled = false;
-////        var figureSource = "WinnerLine.qml"
-////        var component = Qt.createComponent(figureSource);
-////        if (component.status == Component.Ready)
-////            var symbol = component.createObject(boardForm);
-//    }
+
+    onWinnerSpacesChanged:
+    {
+        if(winnerSpaces.length === 3)
+        {
+            //drawing winning line
+            var figureSource = "WinnerLine.qml";
+            var component = Qt.createComponent(figureSource);
+            if (component.status === Component.Ready)
+                winnerLine = component.createObject(boardForm);
+
+            console.log(point1)
+            console.log(point2)
+            line.point1 = winnerSpaces[0];
+            line.point2 = winnerSpaces[2];
+            line.requestPaint();
+        }
+    }
 
     Component {
         id: delegate
@@ -36,7 +45,7 @@ Item {
                     var figureSource = boardForm.actualPlayer == 1 ?
                                 "Nought.qml" : "Cross.qml";
                     var component = Qt.createComponent(figureSource);
-                    if (component.status == Component.Ready)
+                    if (component.status === Component.Ready)
                         var symbol = component.createObject(field);
                         symbols[index] = symbol;
                 }

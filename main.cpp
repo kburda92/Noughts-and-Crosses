@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<Result>("result", 1, 0, "result", "");
     engine.rootContext()->setContextProperty("gameEngine", &gameEngine);
     engine.rootContext()->setContextProperty("result", gameEngine.result());
-//    qmlRegisterType <Receiver> (ui, 1, 0, "DataReceiver");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

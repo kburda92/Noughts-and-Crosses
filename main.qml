@@ -22,10 +22,20 @@ Window {
                     board.symbols[i].destroy();
             }
             board.symbols.splice(0, board.symbols.length);
+            if(board.winnerLine !== undefined)
+                board.winnerLine.destroy();
             gameEngine.StartNewGame();
             result.startButton.visible = false;
             result.winnerRowVisible = false;
             board.enabled = true;
+        }
+
+        result.onDrawsChanged:
+        {
+            result.startButton.visible = true;
+            result.winnerValue = "Draw"
+            result.winnerRowVisible = true;
+            board.enabled = false;
         }
 
         board.onWinnerSpacesChanged:
@@ -35,7 +45,7 @@ Window {
                 result.winnerValue = board.actualPlayer == 1 ? "Player 1" : "Player 2";
                 result.startButton.visible = true;
                 result.winnerRowVisible = true;
-                boardForm.enabled = true;
+                board.enabled = false;
             }
         }
     }
