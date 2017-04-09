@@ -8,8 +8,6 @@ Item {
     property var symbols: new Array(9)
     property var winnerLine
 
-
-
     onWinnerSpacesChanged:
     {
         if(winnerSpaces.length === 3)
@@ -20,11 +18,9 @@ Item {
             if (component.status === Component.Ready)
                 winnerLine = component.createObject(boardForm);
 
-            console.log(point1)
-            console.log(point2)
-            line.point1 = winnerSpaces[0];
-            line.point2 = winnerSpaces[2];
-            line.requestPaint();
+            winnerLine.point1 = winnerSpaces[0];
+            winnerLine.point2 = winnerSpaces[2];
+//            winnerLine.requestPaint();
         }
     }
 
@@ -51,7 +47,7 @@ Item {
                 }
                 onClicked:
                 {
-                    //if index is empty MarkSpace return true and we can put mark on it
+                    //if space is empty MarkSpace return true and we can put mark on it
                     if(gameEngine.MarkSpace(index))
                         loadMark();
                 }

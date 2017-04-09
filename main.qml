@@ -22,7 +22,7 @@ Window {
                     board.symbols[i].destroy();
             }
             board.symbols.splice(0, board.symbols.length);
-            if(board.winnerLine !== undefined)
+            if(board.winnerLine !== undefined && board.winnerLine !== null)
                 board.winnerLine.destroy();
             gameEngine.StartNewGame();
             result.startButton.visible = false;
