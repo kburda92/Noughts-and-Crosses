@@ -5,7 +5,8 @@ CONFIG += c++14
 
 SOURCES += main.cpp \
     GameEngine.cpp \
-    Game.cpp
+    Game.cpp \
+    Result.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,4 +19,5 @@ include(deployment.pri)
 HEADERS += \
     GameEngine.h \
     Game.h \
-    Utils.h
+    Utils.h \
+    Result.h

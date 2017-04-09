@@ -1,11 +1,13 @@
 #include "GameEngine.h"
 #include "Game.h"
+#include "Result.h"
+#include "utils.h"
 #include <QDebug>
 
 using namespace std;
 
 GameEngine::GameEngine(QObject* parent) : QObject(parent),
-  game(make_unique<Game>())
+  game(make_unique<Game>()), m_result(new Result(this))
 {
     m_actual_player = 1;
 }
@@ -14,57 +16,20 @@ GameEngine::~GameEngine()
 {
 }
 
-void GameEngine::setDraws(int value)
+Result* GameEngine::result() const
 {
-    if(value != m_draws)
-    {
-        m_draws = value;
-        emit drawsChanged();
-    }
+    return m_result;
 }
 
-void GameEngine::setPlayer1Won(int value)
+int GameEngine::actualPlayer() const
 {
-    if(value != m_player1_won)
-    {
-        m_player1_won = value;
-        emit player1Changed();
-    }
-}
-
-void GameEngine::setPlayer2Won(int value)
-{
-    if(value != m_player2_won)
-    {
-        m_player2_won = value;
-        emit player2Changed();
-    }
+    return m_actual_player;
 }
 
 void GameEngine::setActualPlayer(int value)
 {
     m_actual_player = value;
     emit actualPlayerChanged();
-}
-
-int GameEngine::draws() const
-{
-    return m_draws;
-}
-
-int GameEngine::player1Won() const
-{
-    return m_player1_won;
-}
-
-int GameEngine::player2Won() const
-{
-    return m_player2_won;
-}
-
-int GameEngine::actualPlayer() const
-{
-    return m_actual_player;
 }
 
 bool GameEngine::MarkSpace(int index)
@@ -76,12 +41,12 @@ bool GameEngine::MarkSpace(int index)
     if(game->Mark(index, m_actual_player))
     {
         if(m_actual_player == 1)
-            setPlayer1Won(m_player1_won + 1);
+            result()->incPlayer1Won();
         else if(m_actual_player == 2)
-            setPlayer2Won(m_player2_won + 1);
+            result()->incPlayer2Won();
     }
     else if(game->IsBoardFull())
-        setDraws(m_draws + 1);
+        result()->incDraws();
 
     ChangePlayer();
     return true;

@@ -2,8 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QQmlContext>
-#include <memory>
 #include "GameEngine.h"
+#include "Result.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +11,12 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     GameEngine gameEngine;
+//    Result* result(&gameEngine);
+//    gameEngine.set
+
+    qmlRegisterUncreatableType<Result>("result", 1, 0, "result", "");
     engine.rootContext()->setContextProperty("gameEngine", &gameEngine);
+    engine.rootContext()->setContextProperty("result", gameEngine.result());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
