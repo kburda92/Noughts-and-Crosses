@@ -12,8 +12,7 @@ Item {
     property alias player1Bold: player1WonText.font.bold
     property alias player2Bold: player2WonText.font.bold
     property alias startButton: startButton
-    property alias winnerRowVisible: winnerRow.visible
-    property alias winnerValue: winnerValue.text
+    property alias lastResult: lastResult
 
     Rectangle {
         id: rectangle
@@ -117,32 +116,18 @@ Item {
 
 
 
-        Row {
-            id: winnerRow
-            y: 180
-            width: 160
-            height: 20
-            visible: false
+        Text {
+            id: lastResult
+            y: 181
+            text: qsTr("Text")
+            horizontalAlignment: Text.AlignHCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 30
             anchors.left: parent.left
-            anchors.leftMargin: 0
-
-            Text {
-                id: winnerText
-                x: 8
-                width: 80
-                height: 18
-                text: qsTr("Winner is: ")
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 15
-            }
-
-            Text {
-                id: winnerValue
-                width: 80
-                text: qsTr("Text")
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 15
-            }
+            anchors.leftMargin: 30
+            anchors.verticalCenter: parent.verticalCenter
+            visible: false
+            font.pixelSize: 16
         }
     }
 }

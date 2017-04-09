@@ -26,15 +26,15 @@ Window {
                 board.winnerLine.destroy();
             gameEngine.StartNewGame();
             result.startButton.visible = false;
-            result.winnerRowVisible = false;
+            result.lastResult.visible = false;
             board.enabled = true;
         }
 
         result.onDrawsChanged:
         {
             result.startButton.visible = true;
-            result.winnerValue = "Draw"
-            result.winnerRowVisible = true;
+            result.lastResult.text = "Draw"
+            result.lastResult.visible = true;
             board.enabled = false;
         }
 
@@ -42,9 +42,9 @@ Window {
         {
             if(result.draws !== "0" || result.player1Won !== "0" || result.player2Won !== "0")
             {
-                result.winnerValue = board.actualPlayer == 1 ? "Player 1" : "Player 2";
+                result.lastResult.text = board.actualPlayer == 1 ? "Player 1 won" : "Player 2 won";
                 result.startButton.visible = true;
-                result.winnerRowVisible = true;
+                result.lastResult.visible = true;
                 board.enabled = false;
             }
         }
