@@ -24,20 +24,19 @@ Window {
             board.symbols.splice(0, board.symbols.length);
             gameEngine.StartNewGame();
             result.startButton.visible = false;
+            result.winnerRowVisible = false;
             board.enabled = true;
         }
 
-        result.onDrawsChanged:
+        board.onWinnerSpacesChanged:
         {
-            result.startButton.visible = true;
-        }
-        result.onPlayer1WonChanged:
-        {
-            result.startButton.visible = true;
-        }
-        result.onPlayer2WonChanged:
-        {
-            result.startButton.visible = true;
+            if(result.draws !== "0" || result.player1Won !== "0" || result.player2Won !== "0")
+            {
+                result.winnerValue = board.actualPlayer == 1 ? "Player 1" : "Player 2";
+                result.startButton.visible = true;
+                result.winnerRowVisible = true;
+                boardForm.enabled = true;
+            }
         }
     }
 

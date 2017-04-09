@@ -4,24 +4,20 @@ Item {
     id: boardForm
     enabled: false
     property int actualPlayer: gameEngine.actualPlayer
-    property alias grid: grid
     property var winnerSpaces: gameEngine.winnerSpaces
     property var symbols: new Array(9)
+    property var winnerLine
+//    property alias onWinnerSpacesChanged: onWinnerSpacesChanged
 
 
-    Canvas
-    {
-        id: winning
-        anchors.fill: parent
-        function drawLine(){
-        }
-    }
-
-    onWinnerSpacesChanged:
-    {
-        boardForm.enabled = false;
-        console.log(gameEngine.winnerSpaces);
-    }
+//    onWinnerSpacesChanged:
+//    {
+////      boardForm.enabled = false;
+////        var figureSource = "WinnerLine.qml"
+////        var component = Qt.createComponent(figureSource);
+////        if (component.status == Component.Ready)
+////            var symbol = component.createObject(boardForm);
+//    }
 
     Component {
         id: delegate

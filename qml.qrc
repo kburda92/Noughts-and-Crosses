@@ -7,5 +7,6 @@
         <file>Board.qml</file>
         <file>Cross.qml</file>
         <file>Nought.qml</file>
+        <file>WinnerLine.qml</file>
     </qresource>
 </RCC>
