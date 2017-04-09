@@ -18,10 +18,10 @@ bool Game::Mark(int fieldNumber, int player)
         throw "player can't' mark field as empty";
 
     m_board[fieldNumber] = player;
-    return IsAnyPlayerWinner();
+    return isAnyPlayerWinner();
 }
 
-bool Game::IsAnyPlayerWinner()
+bool Game::isAnyPlayerWinner()
 {
     for(auto& layout : m_winning_layouts)
     {
@@ -34,18 +34,27 @@ bool Game::IsAnyPlayerWinner()
             continue;
 
         if(equal(begin(temp_array)+1, end(temp_array), begin(temp_array)))
+        {
+            //convert to QList
+            m_winner_spaces = ConvertArrayToQList(layout);
             return true;
+        }
     }
 
     return false;
 }
 
-int Game::IsBoardFull()
+int Game::isBoardFull()
 {
     return !ContainsValue(m_board, 0);
 }
 
-bool Game::IsSpaceEmpty(int index)
+bool Game::isSpaceEmpty(int index)
 {
     return !m_board.at(index);
+}
+
+QList<int> Game::winnerSpaces()
+{
+    return m_winner_spaces;
 }

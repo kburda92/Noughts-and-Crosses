@@ -8,9 +8,10 @@ class Game
 {
 public:
     Game();
-    bool Mark(int fieldNumber, int player);
-    int IsBoardFull();
-    bool IsSpaceEmpty(int index);
+    bool Mark(int space, int player);
+    int isBoardFull();
+    bool isSpaceEmpty(int index);
+    QList<int> winnerSpaces();
 private:
     //board:
     //0   1   2
@@ -32,7 +33,8 @@ private:
         {{0, 4, 8}},
         {{2, 4, 6}}
     }};
-    bool IsAnyPlayerWinner();
+    bool isAnyPlayerWinner();
+    QList<int> m_winner_spaces;
 };
 
 #endif // GAME_H

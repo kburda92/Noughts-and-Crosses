@@ -7,9 +7,9 @@
 using namespace std;
 
 GameEngine::GameEngine(QObject* parent) : QObject(parent),
-  game(make_unique<Game>()), m_result(new Result(this))
+  game(make_unique<Game>()), m_result(new Result(this)),  m_actual_player(1)
 {
-    m_actual_player = 1;
+
 }
 
 GameEngine::~GameEngine()
@@ -19,6 +19,17 @@ GameEngine::~GameEngine()
 Result* GameEngine::result() const
 {
     return m_result;
+}
+
+QList<int> GameEngine::winnerSpaces() const
+{
+    return m_winner_spaces;
+}
+
+void GameEngine::setWinnerSpaces(const QList<int>& spaces)
+{
+    m_winner_spaces = spaces;
+    emit winnerSpacesChanged();
 }
 
 int GameEngine::actualPlayer() const
@@ -34,9 +45,9 @@ void GameEngine::setActualPlayer(int value)
 
 bool GameEngine::MarkSpace(int index)
 {
-    if(!game->IsSpaceEmpty(index))
+    if(!game->isSpaceEmpty(index))
         return false;
-    //if MakeMove returns true we send signal to QML window about winner
+    //if MakeMove returns true we send signal to QML window about winner with winner marked spaces
     //if MakeMove returns false we must we must check is board full - then it is draw
     if(game->Mark(index, m_actual_player))
     {
@@ -44,8 +55,9 @@ bool GameEngine::MarkSpace(int index)
             result()->incPlayer1Won();
         else if(m_actual_player == 2)
             result()->incPlayer2Won();
+        setWinnerSpaces(game->winnerSpaces());
     }
-    else if(game->IsBoardFull())
+    else if(game->isBoardFull())
         result()->incDraws();
 
     ChangePlayer();

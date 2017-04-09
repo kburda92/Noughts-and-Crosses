@@ -2,9 +2,26 @@ import QtQuick 2.0
 
 Item {
     id: boardForm
+    enabled: false
     property int actualPlayer: gameEngine.actualPlayer
     property alias grid: grid
-    property var symbols : []
+    property var winnerSpaces: gameEngine.winnerSpaces
+    property var symbols: new Array(9)
+
+
+    Canvas
+    {
+        id: winning
+        anchors.fill: parent
+        function drawLine(){
+        }
+    }
+
+    onWinnerSpacesChanged:
+    {
+        boardForm.enabled = false;
+        console.log(gameEngine.winnerSpaces);
+    }
 
     Component {
         id: delegate
@@ -25,7 +42,7 @@ Item {
                     var component = Qt.createComponent(figureSource);
                     if (component.status == Component.Ready)
                         var symbol = component.createObject(field);
-                        symbols.push(symbol);
+                        symbols[index] = symbol;
                 }
                 onClicked:
                 {
@@ -47,20 +64,5 @@ Item {
         cellWidth: width/3
         model: 9
         delegate: delegate
-//        states: [
-//            State {
-//                name: "game"
-//                onCompleted:
-//                {
-
-//                }
-
-//                PropertyChanges { target: myRect; color: "red" }
-//            },
-//            State {
-//                name: "over"
-//                PropertyChanges { target: myRect; color: "red" }
-//            }
-//        ]
     }
 }

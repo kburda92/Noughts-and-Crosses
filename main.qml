@@ -17,10 +17,14 @@ Window {
         result.startButton.onClicked:
         {
             for (var i = 0; i < board.symbols.length; i ++)
-                board.symbols[i].destroy();
+            {
+                if(board.symbols[i] !== undefined)
+                    board.symbols[i].destroy();
+            }
             board.symbols.splice(0, board.symbols.length);
             gameEngine.StartNewGame();
             result.startButton.visible = false;
+            board.enabled = true;
         }
 
         result.onDrawsChanged:
@@ -31,7 +35,6 @@ Window {
         {
             result.startButton.visible = true;
         }
-
         result.onPlayer2WonChanged:
         {
             result.startButton.visible = true;
