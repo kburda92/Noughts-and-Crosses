@@ -10,6 +10,7 @@ public:
     Game();
     bool Mark(int fieldNumber, int player);
     int IsBoardFull();
+    bool IsSpaceEmpty(int index);
 private:
     //board:
     //0   1   2

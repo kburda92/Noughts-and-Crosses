@@ -9,6 +9,8 @@ Item {
     property alias draws: drawsValue.text
     property alias player1Won: player1WonValue.text
     property alias player2Won: player2WonValue.text
+    property alias player1Bold: player1WonText.font.bold
+    property alias player2Bold: player2WonText.font.bold
     property alias startButton: startButton
 
     Rectangle {

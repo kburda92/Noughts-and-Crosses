@@ -8,7 +8,6 @@ using namespace std;
 //we must fill our board with empty values
 Game::Game() : m_board {0}
 {
-    //MakeMove(0, cross);
 }
 
 bool Game::Mark(int fieldNumber, int player)
@@ -44,4 +43,9 @@ bool Game::IsAnyPlayerWinner()
 int Game::IsBoardFull()
 {
     return !ContainsValue(m_board, 0);
+}
+
+bool Game::IsSpaceEmpty(int index)
+{
+    return !m_board.at(index);
 }

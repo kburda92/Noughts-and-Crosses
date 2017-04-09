@@ -3,6 +3,8 @@ import QtQuick 2.0
 Item {
     id: boardForm
     property int actualPlayer: gameEngine.actualPlayer
+    property alias grid: grid
+    property var symbols : []
 
     Component {
         id: delegate
@@ -17,22 +19,21 @@ Item {
             MouseArea{
                 id: field
                 anchors.fill: parent
-                function loadSymbol() {
+                function loadMark() {
                     var figureSource = boardForm.actualPlayer == 1 ?
                                 "Nought.qml" : "Cross.qml";
                     var component = Qt.createComponent(figureSource);
                     if (component.status == Component.Ready)
-                        var button = component.createObject(field);
+                        var symbol = component.createObject(field);
+                        symbols.push(symbol);
                 }
                 onClicked:
                 {
-                   loadSymbol();
-                   gameEngine.MarkSpace(index);
-                   field.enabled = false;
+                    //if index is empty MarkSpace return true and we can put mark on it
+                    if(gameEngine.MarkSpace(index))
+                        loadMark();
                 }
             }
-
-
         }
     }
 
@@ -45,6 +46,21 @@ Item {
         cellHeight: height/3
         cellWidth: width/3
         model: 9
-        delegate: delegate        
+        delegate: delegate
+//        states: [
+//            State {
+//                name: "game"
+//                onCompleted:
+//                {
+
+//                }
+
+//                PropertyChanges { target: myRect; color: "red" }
+//            },
+//            State {
+//                name: "over"
+//                PropertyChanges { target: myRect; color: "red" }
+//            }
+//        ]
     }
 }

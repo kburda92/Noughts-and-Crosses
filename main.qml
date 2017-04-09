@@ -13,6 +13,29 @@ Window {
 
     MainForm {
         anchors.fill: parent
+
+        result.startButton.onClicked:
+        {
+            for (var i = 0; i < board.symbols.length; i ++)
+                board.symbols[i].destroy();
+            board.symbols.splice(0, board.symbols.length);
+            gameEngine.StartNewGame();
+            result.startButton.visible = false;
+        }
+
+        result.onDrawsChanged:
+        {
+            result.startButton.visible = true;
+        }
+        result.onPlayer1WonChanged:
+        {
+            result.startButton.visible = true;
+        }
+
+        result.onPlayer2WonChanged:
+        {
+            result.startButton.visible = true;
+        }
     }
 
 }

@@ -67,11 +67,13 @@ int GameEngine::actualPlayer() const
     return m_actual_player;
 }
 
-void GameEngine::MarkSpace(int space)
+bool GameEngine::MarkSpace(int index)
 {
+    if(!game->IsSpaceEmpty(index))
+        return false;
     //if MakeMove returns true we send signal to QML window about winner
     //if MakeMove returns false we must we must check is board full - then it is draw
-    if(game->Mark(space, m_actual_player))
+    if(game->Mark(index, m_actual_player))
     {
         if(m_actual_player == 1)
             setPlayer1Won(m_player1_won + 1);
@@ -82,6 +84,7 @@ void GameEngine::MarkSpace(int space)
         setDraws(m_draws + 1);
 
     ChangePlayer();
+    return true;
 }
 
 void GameEngine::ChangePlayer()
@@ -90,4 +93,10 @@ void GameEngine::ChangePlayer()
         setActualPlayer(2);
     else if(m_actual_player == 2)
         setActualPlayer(1);
+}
+
+void GameEngine::StartNewGame()
+{
+    game.reset();
+    game = make_unique<Game>();
 }

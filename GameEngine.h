@@ -25,7 +25,8 @@ public:
     int player1Won() const;
     int player2Won() const;
     int actualPlayer() const;
-    Q_INVOKABLE void MarkSpace(int player);
+    Q_INVOKABLE bool MarkSpace(int player);
+    Q_INVOKABLE void StartNewGame();
 private:
     //m_results[0] - draws,
     //m_results[1] - player1 wins

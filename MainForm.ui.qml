@@ -8,6 +8,9 @@ Rectangle {
     z: 1
     scale: 1
 
+    property alias result: resultForm
+    property alias board: boardForm
+
     Result {
         id: resultForm
         x: 310
@@ -17,7 +20,6 @@ Rectangle {
         opacity: 1
         z: 10
         anchors.right: parent.right
-        anchors.rightMargin: 0
     }
 
     Board {
