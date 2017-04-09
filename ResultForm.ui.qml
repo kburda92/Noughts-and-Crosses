@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 
 
 Item {
-    width: 120
+    width: 160
     height: 360
 
     property alias draws: drawsValue.text
@@ -65,7 +65,7 @@ Item {
                 Text {
                     id: player1WonText
                     y: 0
-                    text: qsTr("Player1:")
+                    text: qsTr("Player1 (X):")
                     font.pixelSize: 20
                 }
 
@@ -86,7 +86,7 @@ Item {
                 Text {
                     id: player2WonText
                     y: 0
-                    text: qsTr("Player2:")
+                    text: qsTr("Player2 (O):")
                     font.pixelSize: 20
                 }
 
